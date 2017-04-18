@@ -12,10 +12,13 @@ class CreateUser extends React.Component {
   }
 
   state = {
-    emailAddress: '',
     name: '',
+    emailAddress: '',
+    image: '',
+    creditCard: '',
     emailSubscription: false,
-    wallet: 0
+    point: 100,
+    streak: 0
   }
 
   render () {
@@ -34,16 +37,30 @@ class CreateUser extends React.Component {
         <div style={{ maxWidth: 400 }} className=''>
           <input
             className='w-100 pa3 mv2'
+            value={this.state.name}
+            placeholder='Name'
+            onChange={(e) => this.setState({name: e.target.value})}
+          />
+          <input
+            className='w-100 pa3 mv2'
             value={this.state.emailAddress}
             placeholder='Email'
             onChange={(e) => this.setState({emailAddress: e.target.value})}
           />
           <input
             className='w-100 pa3 mv2'
-            value={this.state.name}
-            placeholder='Name'
-            onChange={(e) => this.setState({name: e.target.value})}
+            value={this.state.image}
+            placeholder='image url'
+            onChange={(e) => this.setState({image:e.target.value})}
           />
+          <input
+            className='w-100 pa3 mv2'
+            value={this.state.creditCard}
+            placeholder='Credit Card'
+            type='number'
+            onChange={(e) => this.setState({creditCard:e.target.value})}
+          />
+          {console.log(this.state.creditCard)}
           <div>
             <input
               className='w-100 pa3 mv2'
@@ -64,13 +81,17 @@ class CreateUser extends React.Component {
     )
   }
 
+
   createUser = () => {
-    console.log(this.state.wallet)
+    console.log(this.state.point)
     const variables = {
       idToken: window.localStorage.getItem('auth0IdToken'),
       emailAddress: this.state.emailAddress,
+      image:this.state.image,
+      creditCard: this.state.creditCard,
       name: this.state.name,
-      wallet: this.state.wallet,
+      point: this.state.point,
+      streak: this.state.streak,
       emailSubscription: this.state.emailSubscription,
     }
 
@@ -85,8 +106,8 @@ class CreateUser extends React.Component {
 }
 
 const createUser = gql`
-  mutation ($idToken: String!, $name: String!, $emailAddress: String!, $wallet: Int!, $emailSubscription: Boolean!){
-    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddress, wallet: $wallet, emailSubscription: $emailSubscription) {
+  mutation ($idToken: String!, $name: String!, $emailAddress: String!, $image: String!, $creditCard: String!, $point: Int!, $streak: Int!, $emailSubscription: Boolean!){
+    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddress, image: $image, creditCard: $creditCard, point: $point, streak: $streak, emailSubscription: $emailSubscription) {
       id
     }
   }

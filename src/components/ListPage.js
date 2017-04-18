@@ -31,6 +31,9 @@ const FeedQuery = gql`query FeedQuery {
     imageUrl
     title
     description
+    pointCost
+    start
+    finish
   }
 }`
 
