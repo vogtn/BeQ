@@ -15,6 +15,7 @@ class CreateUser extends React.Component {
     emailAddress: '',
     name: '',
     emailSubscription: false,
+    wallet: 0
   }
 
   render () {
@@ -64,10 +65,12 @@ class CreateUser extends React.Component {
   }
 
   createUser = () => {
+    console.log(this.state.wallet)
     const variables = {
       idToken: window.localStorage.getItem('auth0IdToken'),
       emailAddress: this.state.emailAddress,
       name: this.state.name,
+      wallet: this.state.wallet,
       emailSubscription: this.state.emailSubscription,
     }
 
@@ -82,8 +85,8 @@ class CreateUser extends React.Component {
 }
 
 const createUser = gql`
-  mutation ($idToken: String!, $name: String!, $emailAddress: String!, $emailSubscription: Boolean!){
-    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddress, emailSubscription: $emailSubscription) {
+  mutation ($idToken: String!, $name: String!, $emailAddress: String!, $wallet: Int!, $emailSubscription: Boolean!){
+    createUser(authProvider: {auth0: {idToken: $idToken}}, name: $name, emailAddress: $emailAddress, wallet: $wallet, emailSubscription: $emailSubscription) {
       id
     }
   }

@@ -6,8 +6,8 @@ import gql from 'graphql-tag'
 import ListPage from './ListPage'
 import NewPostLink from './NewPostLink'
 
-const clientId = '__AUTH0_CLIENT_ID__'
-const domain='__AUTH0_DOMAIN__'
+const clientId = 'z5exa3746xIS7wVwGuPLPTz5aauBNAz2'
+const domain='m-woo.auth0.com'
 
 class App extends React.Component {
   static propTypes = {
