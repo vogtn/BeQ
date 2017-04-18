@@ -40,31 +40,42 @@ class App extends React.Component {
   renderLoggedIn() {
     return (
       <div>
-        <div className='pv3'>
-          <span
-            className='dib bg-red white pa3 pointer dim'
-            onClick={this._logout}
-          >
-            Logout
-          </span>
-        </div>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+              <div className="navbar-header">
+                  <a className="navbar-brand" href="#">NADASCAM</a>
+              </div>
+              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul className="nav navbar-nav">
+                      <li className="active"><a href="/create">+ NEW EVENT<span className="sr-only">(current)</span></a></li>
+                  </ul>
+                  <ul className="nav navbar-nav navbar-right">
+                      <li><a href="/profile">{this.props.data.user.name}</a></li>
+                      <li><a onClick={this._logout}>LOGOUT</a></li>
+                  </ul>
+              </div>
+          </div>
+        </nav>
         <ListPage />
-        <NewPostLink />
       </div>
     )
   }
 
-  renderLoggedOut() {
+    renderLoggedOut() {
     return (
       <div>
-        <div className='pv3'>
-          <LoginAuth0
-            clientId={clientId}
-            domain={domain}
-          />
-        </div>
-        <span>Log in to create new posts</span>
-        <ListPage />
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+              <div className="navbar-header">
+                  <a className="navbar-brand" href="#">NADASCAM</a>
+              </div>
+              <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul className="nav navbar-nav navbar-right">
+                      <li><a><LoginAuth0 clientId={clientId} domain={domain} /></a></li>
+                  </ul>
+              </div>
+          </div>
+        </nav>
       </div>
     )
   }
@@ -74,6 +85,11 @@ const userQuery = gql`
   query userQuery {
     user {
       id
+      name
+      emailAddress
+      point
+      streak
+      image
     }
   }
 `
