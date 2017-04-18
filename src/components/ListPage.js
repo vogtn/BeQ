@@ -29,6 +29,7 @@ const FeedQuery = gql`query FeedQuery {
   allPosts(orderBy: createdAt_DESC) {
     id
     imageUrl
+    title
     description
   }
 }`
