@@ -36,7 +36,7 @@ ReactDOM.render((
       <Route path='create' component={CreatePost} />
       <Route path='signup' component={CreateUser} />
       <Route path='profile' component={Profile} />
-      <Route path=':id' component={PostView} />
+      <Route path=':id' component={PostView} id=':id' />
     </Router>
   </ApolloProvider>
   ),
