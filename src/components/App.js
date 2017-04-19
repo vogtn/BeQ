@@ -47,12 +47,12 @@ class App extends React.Component {
                   <a className="navbar-brand" href="#">NADASCAM</a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul className="nav navbar-nav">
+                  <ul className="nav navbar-nav navbar-center">
                       <li className="active"><a href="/create">+ NEW EVENT<span className="sr-only">(current)</span></a></li>
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
                       <li><a href="/profile">{this.props.data.user.name}</a></li>
-                      <li><a onClick={this._logout}>LOGOUT</a></li>
+                      <li><a onClick={this._logout} href='#'>LOGOUT</a></li>
                   </ul>
               </div>
           </div>
@@ -68,7 +68,7 @@ class App extends React.Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
               <div className="navbar-header">
-                  <a className="navbar-brand" href="#">NADASCAM</a>
+                  <a className="navbar-brand logoutBrand" href="#">NADASCAM</a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav navbar-right">

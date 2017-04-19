@@ -27,6 +27,7 @@ class CreateUser extends React.Component {
     }
 
     // redirect if user is logged in or did not finish Auth0 Lock dialog
+    {}
     if (this.props.data.user || window.localStorage.getItem('auth0IdToken') === null) {
       console.warn('not a new user or already logged in')
       this.props.router.replace('/')
