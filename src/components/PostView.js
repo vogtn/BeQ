@@ -25,7 +25,7 @@ class PostView extends React.Component {
 
 
 const PostQuery = gql`
-  query {
+  query PostQuery {
     Post {
       id
     }
