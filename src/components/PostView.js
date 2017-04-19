@@ -18,12 +18,20 @@ class PostView extends React.Component {
     return (
       <div className='w-100 flex justify-center'>
         {console.log(this.props.data)}
+        <div className="well">
+          <h1>Title: {this.props.data.Post.title}</h1>
+          <p>description: {this.props.data.Post.description}</p>
+          <p>point cost: {this.props.data.Post.pointCost}</p>
+          <p>Finish Date: {this.props.data.Post.finish}</p>
+          <img src={this.props.data.Post.imageUrl} />
+          <p>Outcomes: {this.props.data.Post.outcomes}</p>
+        </div>
       </div>
     )
   }
 }
 const Path = location.pathname.substr(1);
-console.log(Path)
+
 const PostQuery = gql`
   query PostQuery {
     Post {
@@ -33,6 +41,9 @@ const PostQuery = gql`
       title
       description
       pointCost
+      finish
+      imageUrl
+      outcomes
     }
   }
 `
