@@ -75,6 +75,8 @@ const createUserChoice = gql`
   `
 
 const PostQuery = gql`
+  query PostQuery {
+    Post {
   query {
     Post(id:"${Path}") {
       id
