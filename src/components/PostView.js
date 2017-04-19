@@ -13,6 +13,7 @@ class PostView extends React.Component {
   }
 
   state = {
+    post: location.pathname.substr(1),
     outcomeChoice: false,
   }
 
@@ -38,7 +39,8 @@ class PostView extends React.Component {
   }
   handleYes = () => {
     const variables = {
-      outcomeChoice: this.state.outcomeChoice
+      outcomeChoice: !this.state.outcomeChoice,
+      post: this.state.post
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
@@ -49,9 +51,15 @@ class PostView extends React.Component {
       })
   }
   handleNo = () => {
-    const {pointCost} = this.state.pointCost
-    this.props.makeBid({variables: {pointCost}})
-      .then(() => {
+    const variables = {
+      outcomeChoice: this.state.outcomeChoice,
+      post: this.state.post
+    }
+    this.props.createUserChoice({ variables })
+      .then((response) => {
+          this.props.router.replace('/')
+      }).catch((e) => {
+        console.error(e)
         this.props.router.replace('/')
       })
   }
@@ -59,8 +67,8 @@ class PostView extends React.Component {
 const Path = location.pathname.substr(1);
 
 const createUserChoice = gql`
-  mutation ($outcomeChoice: Boolean!) {
-    createUserChoice(outcomeChoice: $outcomeChoice) {
+  mutation ($outcomeChoice: Boolean!, $post: String!) {
+    createUserChoice(outcomeChoice: $outcomeChoice, post: $post) {
       id
     }
   }
