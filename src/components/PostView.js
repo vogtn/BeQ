@@ -1,11 +1,12 @@
 import React from 'react'
 import Post from '../components/Post'
 import { graphql } from 'react-apollo'
-import {withRouter} from 'react-router'
+import {withRouter, routeParams} from 'react-router'
 import gql from 'graphql-tag'
 
-class PostView extends React.Component {
 
+
+class PostView extends React.Component {
   static propTypes = {
     data: React.PropTypes.object,
   }
@@ -22,12 +23,15 @@ class PostView extends React.Component {
   }
 }
 
-
-
 const PostQuery = gql`
   query PostQuery {
     Post {
+  query {
+    Post(id: "cj1o6x3li9lzd0105brj9z7s8") {
       id
+      title
+      description
+      pointCost
     }
   }
 `
