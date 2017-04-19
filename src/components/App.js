@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import ListPage from './ListPage'
 import NewPostLink from './NewPostLink'
 import Landing from './Landing'
+import Leaderboard from './Leaderboard'
 
 const clientId = 'z5exa3746xIS7wVwGuPLPTz5aauBNAz2'
 const domain='m-woo.auth0.com'
@@ -58,6 +59,7 @@ class App extends React.Component {
           </div>
         </nav>
         <ListPage />
+        <Leaderboard />
       </div>
     )
   }
