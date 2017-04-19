@@ -24,6 +24,7 @@ export default class Post extends React.Component {
         <div className='pt3'>
           {this.props.post.description}&nbsp;
         </div>
+        <a className='btn btn-default' href={this.props.post.id}>Info</a>
       </div>
     )
   }
