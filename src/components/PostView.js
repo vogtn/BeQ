@@ -22,10 +22,11 @@ class PostView extends React.Component {
     )
   }
 }
-
+const Path = location.pathname.substr(1);
+console.log(Path)
 const PostQuery = gql`
   query {
-    Post(id: "cj1o6x3li9lzd0105brj9z7s8") {
+    Post(id:"${Path}") {
       id
       title
       description
@@ -34,4 +35,4 @@ const PostQuery = gql`
   }
 `
 
-export default graphql(PostQuery, { options: { forceFetch: true }})(withRouter(PostView))
+export default graphql(PostQuery)(withRouter(PostView))
