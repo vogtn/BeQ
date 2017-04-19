@@ -1,4 +1,42 @@
 .navbar {
   border-radius: 0px;
   border: none;
+  margin-bottom: 0px;
+  background-color: #01A2A6;
+}
+
+.hero {
+  width: 100%;
+  height: 450px;
+  background: url(../img/heroimg.jpg) no-repeat center;
+  margin-top: 0px;
+}
+
+.hero h2 {
+  color: white;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.hero-btns {
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-btns h2 {
+  text-shadow: 2px 2px rgb(0, 0, 0);
+  margin-top: 15vh;
+  padding: 0;
+}
+.hero-btns a {
+  margin-top: 5vh;
+}
+
+.btn-lg {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.explain-box {
+  margin-top: 50px;
 }
