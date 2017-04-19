@@ -9,6 +9,11 @@ import gql from 'graphql-tag'
 class PostView extends React.Component {
   static propTypes = {
     data: React.PropTypes.object,
+    makeBid: React.PropTypes.func
+  }
+
+  state = {
+    pointCost: 5,
   }
 
   render () {
@@ -24,13 +29,36 @@ class PostView extends React.Component {
           <p>point cost: {this.props.data.Post.pointCost}</p>
           <p>Finish Date: {this.props.data.Post.finish}</p>
           <img src={this.props.data.Post.imageUrl} />
-          <p>Outcomes: {this.props.data.Post.outcomes}</p>
+          <p>Outcome: {this.props.data.Post.outcomes}</p>
+          <button onClick={this.handleYes}>BID YES ${this.props.data.Post.pointCost}</button>
+          <button onClick={this.handleNo}>BID NO ${this.props.data.Post.pointCost}</button>
         </div>
       </div>
     )
   }
+  handleYes = () => {
+    const {pointCost} = this.state.pointCost
+    this.props.makeBid({variables: {pointCost}})
+      .then(() => {
+        this.props.router.replace('/')
+      })
+  }
+  handleNo = () => {
+    const {pointCost} = this.state.pointCost
+    this.props.makeBid({variables: {pointCost}})
+      .then(() => {
+        this.props.router.replace('/')
+      })
+  }
 }
 const Path = location.pathname.substr(1);
+
+const makeBid = gql`
+  mutation makeBid($pointCost: Int!) {
+    createUserChoice(pointCost: $pointCost) {
+      pointCost
+    }
+  }`
 
 const PostQuery = gql`
   query {
@@ -46,4 +74,4 @@ const PostQuery = gql`
   }
 `
 
-export default graphql(PostQuery)(withRouter(PostView))
+export default graphql(makeBid, {name: 'makeBid'})(graphql(PostQuery)(withRouter(PostView)))
