@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import ListPage from './ListPage'
 import NewPostLink from './NewPostLink'
 import Landing from './Landing'
+import Leaderboard from './Leaderboard'
 
 const clientId = 'z5exa3746xIS7wVwGuPLPTz5aauBNAz2'
 const domain='m-woo.auth0.com'
@@ -47,17 +48,18 @@ class App extends React.Component {
                   <a className="navbar-brand" href="#">NADASCAM</a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul className="nav navbar-nav">
+                  <ul className="nav navbar-nav navbar-center">
                       <li className="active"><a href="/create">+ NEW EVENT<span className="sr-only">(current)</span></a></li>
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
                       <li><a href="/profile">{this.props.data.user.name}</a></li>
-                      <li><a onClick={this._logout}>LOGOUT</a></li>
+                      <li><a onClick={this._logout} href='#'>LOGOUT</a></li>
                   </ul>
               </div>
           </div>
         </nav>
         <ListPage />
+        <Leaderboard />
       </div>
     )
   }
@@ -68,7 +70,7 @@ class App extends React.Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
               <div className="navbar-header">
-                  <a className="navbar-brand" href="#">NADASCAM</a>
+                  <a className="navbar-brand logoutBrand" href="#">NADASCAM</a>
               </div>
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav navbar-right">
