@@ -17,6 +17,7 @@ render () {
             <p>Credit Card #: {this.props.data.user.creditCard}</p>
             <p>point: {this.props.data.user.point}</p>
             <p>steak: {this.props.data.user.streak}</p>
+            <p id='userId'>id: {this.props.data.user.id}</p>
         </div>
     )
   }
