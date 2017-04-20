@@ -64,7 +64,7 @@ class App extends React.Component {
     )
   }
 
-    renderLoggedOut() {
+  renderLoggedOut() {
     return (
       <div>
         <nav className="navbar navbar-default">
