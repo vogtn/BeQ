@@ -16,7 +16,7 @@ render () {
             <p>email: {this.props.data.user.emailAddress}</p>
             <p>Credit Card #: {this.props.data.user.creditCard}</p>
             <p>point: {this.props.data.user.point}</p>
-            <p>steak: {this.props.data.user.streak}</p>
+            <p>streak: {this.props.data.user.streak}</p>
         </div>
     )
   }
