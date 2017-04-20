@@ -9,11 +9,11 @@ import gql from 'graphql-tag'
 class PostView extends React.Component {
   static propTypes = {
     data: React.PropTypes.object,
-    createUserChoice: React.PropTypes.func
+    createUserChoice: React.PropTypes.func,
   }
 
   state = {
-    post: location.pathname.substr(1),
+    UserChoicepostPost: location.pathname.substr(1),
     outcomeChoice: false,
   }
 
@@ -40,7 +40,7 @@ class PostView extends React.Component {
   handleYes = () => {
     const variables = {
       outcomeChoice: !this.state.outcomeChoice,
-      post: this.state.post
+      UserChoicepostPost: this.state.UserChoicepostPost
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
@@ -53,7 +53,7 @@ class PostView extends React.Component {
   handleNo = () => {
     const variables = {
       outcomeChoice: this.state.outcomeChoice,
-      post: this.state.post
+      UserChoicepostPost: this.state.UserChoicepostPost
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
@@ -67,7 +67,7 @@ class PostView extends React.Component {
 const Path = location.pathname.substr(1);
 
 const createUserChoice = gql`
-  mutation ($outcomeChoice: Boolean!, $post: String!) {
+  mutation ($outcomeChoice: Boolean!, $post: UserChoicepostPost) {
     createUserChoice(outcomeChoice: $outcomeChoice, post: $post) {
       id
     }
