@@ -77,6 +77,7 @@ class PostView extends React.Component {
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
+        this.props.router.replace('/')
       }).catch((e) => {
         console.error(e)
         this.props.router.replace('/')
@@ -91,6 +92,7 @@ class PostView extends React.Component {
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
+        this.props.router.replace('/')
       }).catch((e) => {
         console.error(e)
         this.props.router.replace('/')
