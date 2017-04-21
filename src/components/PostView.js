@@ -4,6 +4,7 @@ import { graphql, compose} from 'react-apollo'
 import {withRouter, routeParams} from 'react-router'
 import gql from 'graphql-tag'
 import LoginAuth0 from './LoginAuth0'
+import ListVotes from '../components/ListVotes'
 
 class PostView extends React.Component {
   static propTypes = {
@@ -14,8 +15,7 @@ class PostView extends React.Component {
 
   state = {
     post: location.pathname.substr(1),
-    outcomeChoice: false,
-    userId: null
+    outcomeChoice: false
   }
 
   render () {
@@ -32,6 +32,7 @@ class PostView extends React.Component {
           <p>Finish Date: {this.props.data.Post.finish}</p>
           <img src={this.props.data.Post.imageUrl} />
           <p>Outcome: {this.props.data.Post.outcomes}</p>
+          <ListVotes postId={this.props.data.Post.id} />
           <button onClick={this.handleYes}>BID YES ${this.props.data.Post.pointCost}</button>
           <button onClick={this.handleNo}>BID NO ${this.props.data.Post.pointCost}</button>
         </div>
@@ -41,7 +42,8 @@ class PostView extends React.Component {
   handleYes = () => {
     const variables = {
       outcomeChoice: !this.state.outcomeChoice,
-      post: this.state.post
+      post: this.state.post,
+      user: this.props.data.user.name
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
@@ -54,7 +56,8 @@ class PostView extends React.Component {
   handleNo = () => {
     const variables = {
       outcomeChoice: this.state.outcomeChoice,
-      post: this.state.post
+      post: this.state.post,
+      user: this.props.data.user.name
     }
     this.props.createUserChoice({ variables })
       .then((response) => {
@@ -67,14 +70,13 @@ class PostView extends React.Component {
 }
 const Path = location.pathname.substr(1);
 const createUserChoice = gql`
-  mutation ($outcomeChoice: Boolean!, $post: String!) {
-    createUserChoice(outcomeChoice: $outcomeChoice, post: $post ) {
+  mutation ($outcomeChoice: Boolean!, $post: String!, $user: String!) {
+    createUserChoice(outcomeChoice: $outcomeChoice, post: $post, user: $user ) {
       id
     }
   }
   `
 const PostQuery = gql`
-
   query {
     Post(id:"${Path}") {
       id
@@ -87,8 +89,34 @@ const PostQuery = gql`
     }
     user{
       id
+      name
     }
   }
 `
-export default compose(graphql(createUserChoice), graphql(PostQuery))(PostView)
+const FeedQuery = gql`
+  query FeedQuery{
+    allUserChoice(orderBy: id_DESC){
+      id
+    }
+  }
+`
+export default graphql(createUserChoice, {
+  props({ownProps, mutate}) {
+    return {
+      createUserChoice({variables}) {
+        return mutate({
+          variables: {...variables},
+          updateQueries: {
+            FeedQuery: (prev, {mutationResult}) => {
+              const newUserChoice = mutationResult.data.createUserChoice
+              return {
+                allUserChoice: [...mutationResult.allUserChoice, newUserChoice]
+              }
+            },
+          },
+        })
+      },
+    }
+  }
+})(graphql(PostQuery)(withRouter(PostView)))
 
