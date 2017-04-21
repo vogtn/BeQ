@@ -32,7 +32,7 @@ class LoginAuth0 extends Component {
       <div>
         <span
           onClick={this._showLogin}
-          className='dib pa3 white bg-blue dim pointer'
+          className='dib pa3 white bg-black pointer'
         >
           Sign Up / Log In
         </span>
